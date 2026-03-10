@@ -32,6 +32,16 @@ export default async function CareersPage({ params }: Props) {
               </Link>
             </article>
           ))}
+          {jobs.length === 0 ? (
+            <article className="list-item">
+              <h3>{locale === "id" ? "Posisi Akan Segera Dibuka" : "Positions Opening Soon"}</h3>
+              <p>
+                {locale === "id"
+                  ? "Tim HR sedang mempublikasikan lowongan baru. Silakan cek kembali dalam waktu dekat."
+                  : "Our HR team is preparing new openings. Please check back shortly."}
+              </p>
+            </article>
+          ) : null}
         </div>
       </div>
     </div>

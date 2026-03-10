@@ -42,6 +42,20 @@ export default async function HomePage({ params }: Props) {
               {t.ctaSecondary}
             </Link>
           </div>
+          <div className="metric-row" style={{ marginTop: "1.3rem" }}>
+            <article className="metric">
+              <span>{locale === "id" ? "Sektor Aktif" : "Active Sectors"}</span>
+              <strong>{industries.length}</strong>
+            </article>
+            <article className="metric">
+              <span>{locale === "id" ? "Pimpinan Inti" : "Leadership Team"}</span>
+              <strong>{leadership.length}</strong>
+            </article>
+            <article className="metric">
+              <span>{locale === "id" ? "Update Industri" : "Industry Updates"}</span>
+              <strong>{industryUpdates.length}</strong>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -51,6 +65,7 @@ export default async function HomePage({ params }: Props) {
           <div className="card-grid">
             {industries.map((item) => (
               <article className="card" key={item.id}>
+                <p className="chip">{item.key.replace("-", " ")}</p>
                 <h3>{item.name}</h3>
                 <p>{item.summary}</p>
               </article>

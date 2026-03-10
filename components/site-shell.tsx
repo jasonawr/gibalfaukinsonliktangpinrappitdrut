@@ -17,7 +17,11 @@ export function SiteShell({ locale, children }: Props) {
       <header className="topbar">
         <div className="container topbar-inner">
           <Link className="brand" href={`/${locale}`}>
-            PT Gibalfaukinsonliktangpinrappitdrut
+            <span className="brand-mark">PT</span>
+            <span className="brand-text">
+              PT Gibalfaukinsonliktangpinrappitdrut
+              <small>(Persero) Tbk</small>
+            </span>
           </Link>
           <nav className="nav">
             <Link href={`/${locale}`}>{t.nav.home}</Link>
