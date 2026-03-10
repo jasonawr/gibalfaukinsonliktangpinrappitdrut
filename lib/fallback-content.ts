@@ -5,6 +5,7 @@ type FallbackIndustry = {
   key: string;
   name: string;
   summary: string;
+  imageUrl: string;
 };
 
 type FallbackLeader = {
@@ -34,26 +35,26 @@ type FallbackIndustryUpdate = {
 
 const industriesByLocale: Record<AppLocale, FallbackIndustry[]> = {
   en: [
-    { id: "fi-1", key: "mining", name: "Mining", summary: "Responsible extraction, processing, and supply continuity for strategic minerals." },
-    { id: "fi-2", key: "oil-gas", name: "Oil & Gas", summary: "Integrated upstream-downstream support focused on operational safety and uptime." },
-    { id: "fi-3", key: "healthcare", name: "Hospital/Healthcare", summary: "Healthcare operations, clinical services, and hospital modernization initiatives." },
-    { id: "fi-4", key: "electrical", name: "Electrical", summary: "Industrial electrical systems, reliability engineering, and high-voltage execution." },
-    { id: "fi-5", key: "semiconductor", name: "Semiconductor", summary: "Supply chain and process support for precision semiconductor operations." },
-    { id: "fi-6", key: "machinery", name: "Machinery", summary: "Heavy machinery systems integration, maintenance, and performance optimization." },
-    { id: "fi-7", key: "ai", name: "AI", summary: "Applied AI for predictive operations, asset intelligence, and decision automation." },
-    { id: "fi-8", key: "manufacturing", name: "Manufacturing", summary: "Lean production and industrial transformation across multisector facilities." },
-    { id: "fi-9", key: "civil-infrastructure", name: "Civil & Infrastructure", summary: "Engineering, delivery, and lifecycle support for national-scale infrastructure." },
+    { id: "fi-1", key: "mining", name: "Mining", summary: "Responsible extraction, processing, and supply continuity for strategic minerals.", imageUrl: "https://images.unsplash.com/photo-1581091215367-59ab6dcef9a4?auto=format&fit=crop&w=1200&q=80" },
+    { id: "fi-2", key: "oil-gas", name: "Oil & Gas", summary: "Integrated upstream-downstream support focused on operational safety and uptime.", imageUrl: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1200&q=80" },
+    { id: "fi-3", key: "healthcare", name: "Hospital/Healthcare", summary: "Healthcare operations, clinical services, and hospital modernization initiatives.", imageUrl: "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1200&q=80" },
+    { id: "fi-4", key: "electrical", name: "Electrical", summary: "Industrial electrical systems, reliability engineering, and high-voltage execution.", imageUrl: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=1200&q=80" },
+    { id: "fi-5", key: "semiconductor", name: "Semiconductor", summary: "Supply chain and process support for precision semiconductor operations.", imageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80" },
+    { id: "fi-6", key: "machinery", name: "Machinery", summary: "Heavy machinery systems integration, maintenance, and performance optimization.", imageUrl: "https://images.unsplash.com/photo-1565120130281-53ff18c6b2d2?auto=format&fit=crop&w=1200&q=80" },
+    { id: "fi-7", key: "ai", name: "AI", summary: "Applied AI for predictive operations, asset intelligence, and decision automation.", imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80" },
+    { id: "fi-8", key: "manufacturing", name: "Manufacturing", summary: "Lean production and industrial transformation across multisector facilities.", imageUrl: "https://images.unsplash.com/photo-1567789884554-0b844b597180?auto=format&fit=crop&w=1200&q=80" },
+    { id: "fi-9", key: "civil-infrastructure", name: "Civil & Infrastructure", summary: "Engineering, delivery, and lifecycle support for national-scale infrastructure.", imageUrl: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1200&q=80" },
   ],
   id: [
-    { id: "fi-1", key: "mining", name: "Pertambangan", summary: "Ekstraksi dan pemrosesan mineral strategis dengan prinsip tanggung jawab." },
-    { id: "fi-2", key: "oil-gas", name: "Minyak & Gas", summary: "Dukungan operasi hulu-hilir terintegrasi dengan fokus keselamatan." },
-    { id: "fi-3", key: "healthcare", name: "Rumah Sakit/Kesehatan", summary: "Operasional layanan kesehatan, klinis, dan modernisasi rumah sakit." },
-    { id: "fi-4", key: "electrical", name: "Kelistrikan", summary: "Sistem kelistrikan industri, keandalan, dan eksekusi tegangan tinggi." },
-    { id: "fi-5", key: "semiconductor", name: "Semikonduktor", summary: "Dukungan proses dan rantai pasok untuk operasi semikonduktor presisi." },
-    { id: "fi-6", key: "machinery", name: "Permesinan", summary: "Integrasi sistem alat berat, perawatan, dan optimasi performa." },
-    { id: "fi-7", key: "ai", name: "AI", summary: "Penerapan AI untuk prediksi operasional dan otomasi keputusan." },
-    { id: "fi-8", key: "manufacturing", name: "Manufaktur", summary: "Transformasi produksi dan peningkatan efisiensi fasilitas industri." },
-    { id: "fi-9", key: "civil-infrastructure", name: "Sipil & Infrastruktur", summary: "Rekayasa, konstruksi, dan dukungan siklus hidup infrastruktur skala nasional." },
+    { id: "fi-1", key: "mining", name: "Pertambangan", summary: "Ekstraksi dan pemrosesan mineral strategis dengan prinsip tanggung jawab.", imageUrl: "https://images.unsplash.com/photo-1581091215367-59ab6dcef9a4?auto=format&fit=crop&w=1200&q=80" },
+    { id: "fi-2", key: "oil-gas", name: "Minyak & Gas", summary: "Dukungan operasi hulu-hilir terintegrasi dengan fokus keselamatan.", imageUrl: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1200&q=80" },
+    { id: "fi-3", key: "healthcare", name: "Rumah Sakit/Kesehatan", summary: "Operasional layanan kesehatan, klinis, dan modernisasi rumah sakit.", imageUrl: "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1200&q=80" },
+    { id: "fi-4", key: "electrical", name: "Kelistrikan", summary: "Sistem kelistrikan industri, keandalan, dan eksekusi tegangan tinggi.", imageUrl: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=1200&q=80" },
+    { id: "fi-5", key: "semiconductor", name: "Semikonduktor", summary: "Dukungan proses dan rantai pasok untuk operasi semikonduktor presisi.", imageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80" },
+    { id: "fi-6", key: "machinery", name: "Permesinan", summary: "Integrasi sistem alat berat, perawatan, dan optimasi performa.", imageUrl: "https://images.unsplash.com/photo-1565120130281-53ff18c6b2d2?auto=format&fit=crop&w=1200&q=80" },
+    { id: "fi-7", key: "ai", name: "AI", summary: "Penerapan AI untuk prediksi operasional dan otomasi keputusan.", imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80" },
+    { id: "fi-8", key: "manufacturing", name: "Manufaktur", summary: "Transformasi produksi dan peningkatan efisiensi fasilitas industri.", imageUrl: "https://images.unsplash.com/photo-1567789884554-0b844b597180?auto=format&fit=crop&w=1200&q=80" },
+    { id: "fi-9", key: "civil-infrastructure", name: "Sipil & Infrastruktur", summary: "Rekayasa, konstruksi, dan dukungan siklus hidup infrastruktur skala nasional.", imageUrl: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1200&q=80" },
   ],
 };
 

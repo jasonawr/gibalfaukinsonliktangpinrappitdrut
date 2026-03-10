@@ -28,6 +28,7 @@ export default async function IndustriesPage({ params }: Props) {
         <div className="card-grid">
           {industries.map((item) => (
             <article className="card" key={item.id}>
+              <img alt={item.name} className="card-image" src={item.imageUrl} />
               <p className="chip">{item.key.replace("-", " ")}</p>
               <h3>{item.name}</h3>
               <p>{item.summary}</p>

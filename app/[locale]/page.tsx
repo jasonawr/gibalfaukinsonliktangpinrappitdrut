@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 
 import { copy, isLocale } from "@/lib/i18n";
 import {
+  getClientTestimonials,
+  getFeaturedProjects,
   getHomePage,
   getIndustries,
   getIndustryUpdates,
@@ -26,6 +28,8 @@ export default async function HomePage({ params }: Props) {
     getLeadership(locale),
     getIndustryUpdates(locale),
   ]);
+  const featuredProjects = getFeaturedProjects(locale);
+  const testimonials = getClientTestimonials(locale);
 
   return (
     <div>
@@ -65,6 +69,11 @@ export default async function HomePage({ params }: Props) {
           <div className="card-grid">
             {industries.map((item) => (
               <article className="card" key={item.id}>
+                <img
+                  alt={item.name}
+                  className="card-image"
+                  src={item.imageUrl}
+                />
                 <p className="chip">{item.key.replace("-", " ")}</p>
                 <h3>{item.name}</h3>
                 <p>{item.summary}</p>
@@ -106,6 +115,22 @@ export default async function HomePage({ params }: Props) {
 
       <section className="section">
         <div className="container">
+          <h2>{locale === "id" ? "Sorotan Proyek" : "Featured Projects"}</h2>
+          <div className="card-grid">
+            {featuredProjects.map((project) => (
+              <article className="card" key={project.id}>
+                <img alt={project.title} className="card-image" src={project.imageUrl} />
+                <p className="chip">{project.sector}</p>
+                <h3>{project.title}</h3>
+                <p>{project.summary}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
           <div className="split-head">
             <h2>{locale === "id" ? "Direksi & Pimpinan" : "Directors & Leadership"}</h2>
             <Link className="button ghost" href={`/${locale}/about`}>
@@ -118,6 +143,21 @@ export default async function HomePage({ params }: Props) {
                 <h3>{person.fullName}</h3>
                 <p>{person.roleTitle}</p>
                 <small>{person.qualificationType}</small>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <h2>{locale === "id" ? "Apa Kata Mitra Kami" : "What Partners Say"}</h2>
+          <div className="card-grid">
+            {testimonials.map((item) => (
+              <article className="card" key={item.id}>
+                <p>&ldquo;{item.quote}&rdquo;</p>
+                <h3 style={{ marginTop: "0.8rem" }}>{item.author}</h3>
+                <small>{item.role}</small>
               </article>
             ))}
           </div>

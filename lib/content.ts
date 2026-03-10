@@ -23,6 +23,7 @@ type IndustryItem = {
   key: string;
   name: string;
   summary: string | null;
+  imageUrl: string;
 };
 
 type JobItem = {
@@ -49,6 +50,45 @@ type IndustryUpdateItem = {
   summary: string;
   dateLabel: string;
 };
+
+type ProjectItem = {
+  id: string;
+  title: string;
+  sector: string;
+  summary: string;
+  imageUrl: string;
+};
+
+type TestimonialItem = {
+  id: string;
+  quote: string;
+  author: string;
+  role: string;
+};
+
+const industryImages: Record<string, string> = {
+  mining:
+    "https://images.unsplash.com/photo-1581091215367-59ab6dcef9a4?auto=format&fit=crop&w=1200&q=80",
+  "oil-gas":
+    "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1200&q=80",
+  healthcare:
+    "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1200&q=80",
+  electrical:
+    "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=1200&q=80",
+  semiconductor:
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+  machinery:
+    "https://images.unsplash.com/photo-1565120130281-53ff18c6b2d2?auto=format&fit=crop&w=1200&q=80",
+  ai: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80",
+  manufacturing:
+    "https://images.unsplash.com/photo-1567789884554-0b844b597180?auto=format&fit=crop&w=1200&q=80",
+  "civil-infrastructure":
+    "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1200&q=80",
+};
+
+function getIndustryImageByKey(key: string) {
+  return industryImages[key] || industryImages.manufacturing;
+}
 
 function localeToDb(locale: "en" | "id"): Locale {
   return locale === "id" ? Locale.id : Locale.en;
@@ -128,6 +168,7 @@ export async function getIndustries(locale: "en" | "id"): Promise<IndustryItem[]
         key: sector.key,
         name: translation.name,
         summary: translation.summary,
+        imageUrl: getIndustryImageByKey(sector.key),
       });
     }
     return result.length > 0 ? result : getFallbackIndustries(locale);
@@ -248,4 +289,100 @@ export async function getIndustryUpdates(
     }));
   }
   return getFallbackIndustryUpdates(locale);
+}
+
+export function getFeaturedProjects(locale: AppLocale): ProjectItem[] {
+  if (locale === "id") {
+    return [
+      {
+        id: "pr-1",
+        title: "Modernisasi Sistem Kelistrikan Industri",
+        sector: "Electrical",
+        summary:
+          "Peningkatan keandalan distribusi daya dan sistem proteksi untuk menurunkan downtime kritis.",
+        imageUrl: getIndustryImageByKey("electrical"),
+      },
+      {
+        id: "pr-2",
+        title: "Program Efisiensi Terminal Energi",
+        sector: "Oil & Gas",
+        summary:
+          "Optimasi alur operasional terminal meningkatkan throughput dan standar keselamatan.",
+        imageUrl: getIndustryImageByKey("oil-gas"),
+      },
+      {
+        id: "pr-3",
+        title: "Penguatan Operasi Rumah Sakit DR",
+        sector: "Healthcare",
+        summary:
+          "Integrasi proses klinis dan operasional untuk percepatan waktu respons layanan pasien.",
+        imageUrl: getIndustryImageByKey("healthcare"),
+      },
+    ];
+  }
+
+  return [
+    {
+      id: "pr-1",
+      title: "Industrial Electrical Modernization",
+      sector: "Electrical",
+      summary:
+        "Power reliability and protection system upgrades reduced critical downtime across key facilities.",
+      imageUrl: getIndustryImageByKey("electrical"),
+    },
+    {
+      id: "pr-2",
+      title: "Energy Terminal Efficiency Program",
+      sector: "Oil & Gas",
+      summary:
+        "Terminal workflow optimization improved throughput while strengthening safety compliance.",
+      imageUrl: getIndustryImageByKey("oil-gas"),
+    },
+    {
+      id: "pr-3",
+      title: "DR Hospital Operational Reinforcement",
+      sector: "Healthcare",
+      summary:
+        "Clinical and operations integration accelerated service response and care continuity.",
+      imageUrl: getIndustryImageByKey("healthcare"),
+    },
+  ];
+}
+
+export function getClientTestimonials(locale: AppLocale): TestimonialItem[] {
+  if (locale === "id") {
+    return [
+      {
+        id: "ts-1",
+        quote:
+          "Tim project sangat responsif, disiplin terhadap HSE, dan delivery sesuai target operasi.",
+        author: "Operations Manager",
+        role: "Mitra Sektor Energi",
+      },
+      {
+        id: "ts-2",
+        quote:
+          "Pendekatan integrasi lintas fungsi membuat transformasi fasilitas berjalan jauh lebih stabil.",
+        author: "Plant Director",
+        role: "Mitra Manufaktur",
+      },
+    ];
+  }
+
+  return [
+    {
+      id: "ts-1",
+      quote:
+        "The project team was highly responsive, safety-disciplined, and delivered against operational milestones.",
+      author: "Operations Manager",
+      role: "Energy Sector Partner",
+    },
+    {
+      id: "ts-2",
+      quote:
+        "Their cross-functional integration approach made our facility transformation significantly more stable.",
+      author: "Plant Director",
+      role: "Manufacturing Partner",
+    },
+  ];
 }
