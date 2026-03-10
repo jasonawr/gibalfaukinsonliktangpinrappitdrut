@@ -2,7 +2,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { copy, isLocale } from "@/lib/i18n";
-import { getHomePage, getIndustries, getNews } from "@/lib/content";
+import {
+  getHomePage,
+  getIndustries,
+  getIndustryUpdates,
+  getLeadership,
+  getNews,
+} from "@/lib/content";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -13,10 +19,12 @@ export default async function HomePage({ params }: Props) {
   if (!isLocale(locale)) notFound();
 
   const t = copy[locale];
-  const [home, industries, news] = await Promise.all([
+  const [home, industries, news, leadership, industryUpdates] = await Promise.all([
     getHomePage(locale),
     getIndustries(locale),
     getNews(locale),
+    getLeadership(locale),
+    getIndustryUpdates(locale),
   ]);
 
   return (
@@ -59,6 +67,42 @@ export default async function HomePage({ params }: Props) {
               <article className="list-item" key={post.id}>
                 <h3>{post.title}</h3>
                 <p>{post.excerpt}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <h2>{locale === "id" ? "Pembaruan Industri" : "Industry News Pulse"}</h2>
+          <div className="card-grid">
+            {industryUpdates.map((item) => (
+              <article className="card" key={item.id}>
+                <p className="chip">{item.sector}</p>
+                <h3>{item.title}</h3>
+                <p>{item.summary}</p>
+                <small>{item.dateLabel}</small>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="split-head">
+            <h2>{locale === "id" ? "Direksi & Pimpinan" : "Directors & Leadership"}</h2>
+            <Link className="button ghost" href={`/${locale}/about`}>
+              {locale === "id" ? "Lihat Semua" : "View All"}
+            </Link>
+          </div>
+          <div className="card-grid">
+            {leadership.slice(0, 6).map((person) => (
+              <article className="card" key={person.id}>
+                <h3>{person.fullName}</h3>
+                <p>{person.roleTitle}</p>
+                <small>{person.qualificationType}</small>
               </article>
             ))}
           </div>

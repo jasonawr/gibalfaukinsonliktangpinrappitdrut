@@ -1,5 +1,12 @@
 import { JobStatus, Locale, PublishStatus } from "@prisma/client";
 
+import {
+  getFallbackIndustries,
+  getFallbackIndustryUpdates,
+  getFallbackLeadership,
+  getFallbackNews,
+} from "@/lib/fallback-content";
+import type { AppLocale } from "@/lib/i18n";
 import { prisma } from "@/lib/prisma";
 
 type LeadershipItem = {
@@ -33,6 +40,14 @@ type NewsItem = {
   title: string;
   excerpt: string | null;
   publishedAt: Date | null;
+};
+
+type IndustryUpdateItem = {
+  id: string;
+  sector: string;
+  title: string;
+  summary: string;
+  dateLabel: string;
 };
 
 function localeToDb(locale: "en" | "id"): Locale {
@@ -86,10 +101,10 @@ export async function getLeadership(locale: "en" | "id"): Promise<LeadershipItem
         bio: translation.bio,
       });
     }
-    return result;
+    return result.length > 0 ? result : getFallbackLeadership(locale);
   } catch (error) {
     logContentError("getLeadership", error);
-    return [];
+    return getFallbackLeadership(locale);
   }
 }
 
@@ -115,10 +130,10 @@ export async function getIndustries(locale: "en" | "id"): Promise<IndustryItem[]
         summary: translation.summary,
       });
     }
-    return result;
+    return result.length > 0 ? result : getFallbackIndustries(locale);
   } catch (error) {
     logContentError("getIndustries", error);
-    return [];
+    return getFallbackIndustries(locale);
   }
 }
 
@@ -204,9 +219,33 @@ export async function getNews(locale: "en" | "id"): Promise<NewsItem[]> {
         publishedAt: post.publishedAt,
       });
     }
-    return result;
+    return result.length > 0 ? result : getFallbackNews(locale);
   } catch (error) {
     logContentError("getNews", error);
-    return [];
+    return getFallbackNews(locale);
   }
+}
+
+export async function getIndustryUpdates(
+  locale: AppLocale,
+): Promise<IndustryUpdateItem[]> {
+  const news = await getNews(locale);
+  if (news.length > 0) {
+    return news.slice(0, 3).map((item) => ({
+      id: `iu-${item.id}`,
+      sector: locale === "id" ? "Pembaruan Operasional" : "Operational Update",
+      title: item.title,
+      summary: item.excerpt || (locale === "id" ? "Tidak ada ringkasan." : "No summary available."),
+      dateLabel: item.publishedAt
+        ? item.publishedAt.toLocaleDateString(locale === "id" ? "id-ID" : "en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })
+        : locale === "id"
+          ? "Terbaru"
+          : "Latest",
+    }));
+  }
+  return getFallbackIndustryUpdates(locale);
 }
