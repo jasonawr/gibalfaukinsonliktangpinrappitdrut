@@ -1,0 +1,266 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum RoleName {
+  ADMIN
+  EDITOR
+  HR
+}
+
+enum Locale {
+  en
+  id
+}
+
+enum QualificationType {
+  ENGINEERING
+  DOCTOR
+}
+
+enum JobStatus {
+  OPEN
+  CLOSED
+  DRAFT
+}
+
+enum ApplicationStatus {
+  NEW
+  REVIEWING
+  SHORTLISTED
+  REJECTED
+}
+
+enum InquiryType {
+  CONTACT
+  PARTNERSHIP
+}
+
+enum MediaKind {
+  IMAGE
+  CV
+  DOC
+}
+
+enum PublishStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model Role {
+  id    String   @id @default(cuid())
+  name  RoleName @unique
+  users User[]
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  isActive     Boolean  @default(true)
+  roleId       String
+  role         Role     @relation(fields: [roleId], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  newsPosts    NewsPost[]
+  uploaded     MediaAsset[] @relation("UploadedBy")
+  auditLogs    AuditLog[]
+}
+
+model Page {
+  id          String            @id @default(cuid())
+  slug        String            @unique
+  status      PublishStatus     @default(DRAFT)
+  createdBy   String?
+  updatedBy   String?
+  publishedAt DateTime?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  translations PageTranslation[]
+}
+
+model PageTranslation {
+  id             String   @id @default(cuid())
+  pageId         String
+  locale         Locale
+  title          String
+  body           Json
+  seoTitle       String?
+  seoDescription String?
+
+  page Page @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  @@unique([pageId, locale])
+}
+
+model IndustrySector {
+  id          String                @id @default(cuid())
+  key         String                @unique
+  sortOrder   Int
+  isActive    Boolean               @default(true)
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+
+  translations IndustryTranslation[]
+}
+
+model IndustryTranslation {
+  id        String   @id @default(cuid())
+  industryId String
+  locale    Locale
+  name      String
+  summary   String?
+  content   Json
+
+  industry IndustrySector @relation(fields: [industryId], references: [id], onDelete: Cascade)
+
+  @@unique([industryId, locale])
+}
+
+model LeadershipProfile {
+  id                String              @id @default(cuid())
+  slug              String              @unique
+  sortOrder         Int
+  photoUrl          String?
+  qualificationType QualificationType
+  isActive          Boolean             @default(true)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+
+  translations LeadershipTranslation[]
+}
+
+model LeadershipTranslation {
+  id         String            @id @default(cuid())
+  profileId  String
+  locale     Locale
+  fullName   String
+  roleTitle  String
+  bio        String?
+
+  profile LeadershipProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@unique([profileId, locale])
+}
+
+model Job {
+  id             String              @id @default(cuid())
+  slug           String              @unique
+  department     String
+  location       String
+  employmentType String
+  status         JobStatus           @default(DRAFT)
+  postedAt       DateTime?
+  closedAt       DateTime?
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+
+  translations JobTranslation[]
+  applications JobApplication[]
+}
+
+model JobTranslation {
+  id           String  @id @default(cuid())
+  jobId        String
+  locale       Locale
+  title        String
+  description  Json
+  requirements Json?
+
+  job Job @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  @@unique([jobId, locale])
+}
+
+model MediaAsset {
+  id         String    @id @default(cuid())
+  kind       MediaKind
+  fileName   String
+  mimeType   String
+  sizeBytes  Int
+  storageKey String    @unique
+  createdAt  DateTime  @default(now())
+  uploadedBy String?
+  uploader   User?     @relation("UploadedBy", fields: [uploadedBy], references: [id])
+
+  applications JobApplication[]
+}
+
+model JobApplication {
+  id          String            @id @default(cuid())
+  jobId       String
+  fullName    String
+  email       String
+  phone       String?
+  coverLetter String?
+  status      ApplicationStatus @default(NEW)
+  cvAssetId   String?
+  submittedAt DateTime          @default(now())
+
+  job Job @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  cv  MediaAsset? @relation(fields: [cvAssetId], references: [id])
+
+  @@index([jobId, status])
+}
+
+model ContactInquiry {
+  id          String     @id @default(cuid())
+  type        InquiryType
+  fullName    String
+  company     String?
+  email       String
+  phone       String?
+  message     String
+  submittedAt DateTime   @default(now())
+}
+
+model NewsPost {
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  status           PublishStatus      @default(DRAFT)
+  featuredImageUrl String?
+  authorId         String
+  publishedAt      DateTime?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  author       User                @relation(fields: [authorId], references: [id])
+  translations NewsTranslation[]
+}
+
+model NewsTranslation {
+  id             String @id @default(cuid())
+  newsId         String
+  locale         Locale
+  title          String
+  excerpt        String?
+  content        Json
+  seoTitle       String?
+  seoDescription String?
+
+  news NewsPost @relation(fields: [newsId], references: [id], onDelete: Cascade)
+
+  @@unique([newsId, locale])
+}
+
+model AuditLog {
+  id          String   @id @default(cuid())
+  actorUserId String?
+  action      String
+  entityType  String
+  entityId    String
+  beforeJson  Json?
+  afterJson   Json?
+  createdAt   DateTime @default(now())
+
+  actor User? @relation(fields: [actorUserId], references: [id], onDelete: SetNull)
+}
