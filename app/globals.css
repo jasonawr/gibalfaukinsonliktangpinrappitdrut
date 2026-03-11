@@ -10,6 +10,7 @@
   --primary-deep: #0a3e62;
   --accent: #ff9d3d;
   --line: #d6e2ef;
+  --glow: rgba(11, 111, 164, 0.4);
 }
 
 * {
@@ -24,6 +25,26 @@ body {
     radial-gradient(900px 500px at 80% -15%, #ffe8cd 0%, transparent 45%),
     var(--bg);
   font-family: var(--font-manrope), sans-serif;
+}
+
+:root.theme-dark {
+  --bg: #060d17;
+  --surface: #0d1827;
+  --surface-soft: #122235;
+  --ink: #ebf4ff;
+  --ink-muted: #9db2ca;
+  --primary: #3ec0ff;
+  --primary-deep: #0f6f98;
+  --accent: #ffad4d;
+  --line: #20364f;
+  --glow: rgba(62, 192, 255, 0.38);
+}
+
+:root.theme-dark body {
+  background:
+    radial-gradient(1200px 700px at 10% -20%, rgba(35, 101, 163, 0.45), transparent 55%),
+    radial-gradient(900px 600px at 90% -20%, rgba(255, 148, 39, 0.22), transparent 45%),
+    var(--bg);
 }
 
 h1,
@@ -77,6 +98,11 @@ a {
   backdrop-filter: blur(12px);
 }
 
+:root.theme-dark .topbar {
+  border-bottom-color: rgba(63, 99, 135, 0.38);
+  background: color-mix(in srgb, #0a1625 84%, #112136 16%);
+}
+
 .topbar-inner {
   display: flex;
   align-items: center;
@@ -120,12 +146,20 @@ a {
   color: #4f6681;
 }
 
+:root.theme-dark .brand-text small {
+  color: #8fabc8;
+}
+
 .nav {
   display: flex;
   align-items: center;
   gap: 1.1rem;
   color: #42536a;
   font-size: 0.95rem;
+}
+
+:root.theme-dark .nav {
+  color: #a9c0d9;
 }
 
 .nav a {
@@ -175,10 +209,24 @@ a {
   box-shadow: 0 8px 24px rgba(10, 62, 98, 0.23);
 }
 
+:root.theme-dark .button.solid {
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.34), 0 0 18px var(--glow);
+}
+
 .button.ghost {
   color: #27445d;
   border-color: #9db3c9;
   background: color-mix(in srgb, #fff 80%, #eaf2fa 20%);
+}
+
+:root.theme-dark .button.ghost {
+  color: #c0d5ea;
+  border-color: #3e5873;
+  background: color-mix(in srgb, #10243a 78%, #0f1d2e 22%);
+}
+
+.theme-toggle {
+  min-width: 76px;
 }
 
 .hero {
@@ -196,6 +244,13 @@ a {
     linear-gradient(130deg, #0a3e62 0%, #085b84 45%, #1295b8 100%);
   box-shadow: 0 22px 46px rgba(14, 61, 97, 0.28);
   animation: riseIn 420ms ease both;
+}
+
+:root.theme-dark .hero .container {
+  background:
+    radial-gradient(700px 300px at 80% 0%, rgba(255, 184, 103, 0.22), transparent 65%),
+    linear-gradient(130deg, #071a2d 0%, #0f4667 45%, #14789e 100%);
+  box-shadow: 0 24px 52px rgba(0, 0, 0, 0.45), 0 0 20px rgba(62, 192, 255, 0.2);
 }
 
 .hero .container::before {
@@ -261,6 +316,10 @@ a {
   animation: riseIn 420ms ease both;
 }
 
+:root.theme-dark .card {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.26);
+}
+
 .card:hover {
   transform: translateY(-4px);
   box-shadow: 0 18px 34px rgba(15, 43, 66, 0.13);
@@ -290,6 +349,12 @@ a {
   margin-bottom: 0.45rem;
 }
 
+:root.theme-dark .chip {
+  color: #7cd6ff;
+  background: #123c53;
+  border-color: #1f5a78;
+}
+
 .list-block {
   display: grid;
   gap: 0.85rem;
@@ -302,6 +367,14 @@ a {
   padding: 0.95rem 1rem;
   background: linear-gradient(180deg, #fff 0%, #f9fcff 100%);
   box-shadow: 0 8px 24px rgba(18, 40, 68, 0.06);
+}
+
+:root.theme-dark .list-item,
+:root.theme-dark .panel,
+:root.theme-dark .form-grid,
+:root.theme-dark .metric {
+  background: linear-gradient(180deg, #0e1a2b 0%, #132338 100%);
+  border-color: #23405d;
 }
 
 .split-head {
@@ -367,12 +440,21 @@ pre {
   background: linear-gradient(180deg, #edf2f7 0%, #e7edf4 100%);
 }
 
+:root.theme-dark .footer {
+  border-top-color: #233a55;
+  background: linear-gradient(180deg, #0a1522 0%, #0f1d2d 100%);
+}
+
 .footer-inner {
   display: flex;
   justify-content: space-between;
   padding: 1rem 0;
   color: #4b5c73;
   font-size: 0.9rem;
+}
+
+:root.theme-dark .footer-inner {
+  color: #95abc5;
 }
 
 .admin-nav {
@@ -434,6 +516,46 @@ pre {
 
 .hero .metric strong {
   color: #132840;
+}
+
+:root.theme-dark .hero .metric {
+  background: rgba(12, 31, 49, 0.84);
+  border-color: rgba(107, 167, 211, 0.36);
+}
+
+:root.theme-dark .hero .metric span,
+:root.theme-dark .hero .metric p {
+  color: #9bc0df;
+}
+
+:root.theme-dark .hero .metric strong {
+  color: #e7f2ff;
+}
+
+.locations {
+  padding: 2.3rem 0 1.7rem;
+}
+
+.location-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.location-pill {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.75rem 0.95rem;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--surface) 75%, #ffffff 25%), var(--surface-soft));
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  box-shadow: 0 8px 20px rgba(11, 33, 58, 0.08);
+}
+
+:root.theme-dark .location-pill {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.22), 0 0 12px rgba(62, 192, 255, 0.15);
 }
 
 @keyframes riseIn {

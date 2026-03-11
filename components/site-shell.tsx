@@ -2,6 +2,7 @@ import Link from "next/link";
 import { type ReactNode } from "react";
 
 import { copy, type AppLocale } from "@/lib/i18n";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 type Props = {
   locale: AppLocale;
@@ -11,6 +12,15 @@ type Props = {
 export function SiteShell({ locale, children }: Props) {
   const t = copy[locale];
   const otherLocale = locale === "en" ? "id" : "en";
+  const locations = [
+    "New York",
+    "London",
+    "Singapore",
+    "Amsterdam",
+    "Paris",
+    "Rawamangun",
+    "San Francisco",
+  ];
 
   return (
     <div className="site-root">
@@ -32,6 +42,7 @@ export function SiteShell({ locale, children }: Props) {
             <Link href={`/${locale}/contact`}>{t.nav.contact}</Link>
           </nav>
           <div className="topbar-actions">
+            <ThemeToggle />
             <Link className="button ghost" href={`/${otherLocale}`}>
               {otherLocale.toUpperCase()}
             </Link>
@@ -42,6 +53,21 @@ export function SiteShell({ locale, children }: Props) {
         </div>
       </header>
       <main>{children}</main>
+      <section className="locations">
+        <div className="container">
+          <div className="split-head">
+            <h2>{locale === "id" ? "Lokasi Kami" : "Our Locations"}</h2>
+            <p>{locale === "id" ? "Operasi lintas kota global" : "Global multi-city operations"}</p>
+          </div>
+          <div className="location-grid">
+            {locations.map((location) => (
+              <article className="location-pill" key={location}>
+                {location}
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
       <footer className="footer">
         <div className="container footer-inner">
           <div>(c) 2026 PT Gibalfaukinsonliktangpinrappitdrut (Persero) Tbk</div>
