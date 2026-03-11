@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { getIndustries, getIndustryUpdates } from "@/lib/content";
@@ -28,7 +29,11 @@ export default async function IndustriesPage({ params }: Props) {
         </p>
         <div className="card-grid">
           {industries.map((item) => (
-            <article className="card" key={item.id}>
+            <Link
+              className="card card-link"
+              href={`/${locale}/industries/${item.key}`}
+              key={item.id}
+            >
               <Image
                 alt={item.name}
                 className="card-image"
@@ -39,7 +44,10 @@ export default async function IndustriesPage({ params }: Props) {
               <p className="chip">{item.key.replace("-", " ")}</p>
               <h3>{item.name}</h3>
               <p>{item.summary}</p>
-            </article>
+              <span className="inline-link">
+                {locale === "id" ? "Buka detail industri ->" : "Open industry brief ->"}
+              </span>
+            </Link>
           ))}
         </div>
 

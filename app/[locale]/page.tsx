@@ -47,7 +47,17 @@ export default async function HomePage({ params }: Props) {
               {t.ctaSecondary}
             </Link>
           </div>
+          <div className="signal-bar">
+            <span>Fortune-scale Execution</span>
+            <span>24/7 Command Centers</span>
+            <span>AI-driven Operations</span>
+            <span>Global Multi-City Footprint</span>
+          </div>
           <div className="metric-row" style={{ marginTop: "1.3rem" }}>
+            <article className="metric">
+              <span>{locale === "id" ? "Aset Kelolaan" : "Assets Under Management"}</span>
+              <strong>USD 2.3T</strong>
+            </article>
             <article className="metric">
               <span>{locale === "id" ? "Sektor Aktif" : "Active Sectors"}</span>
               <strong>{industries.length}</strong>
@@ -66,10 +76,38 @@ export default async function HomePage({ params }: Props) {
 
       <section className="section">
         <div className="container">
+          <h2>{locale === "id" ? "Skala Operasi" : "Scale of Operations"}</h2>
+          <div className="metric-row">
+            <article className="metric">
+              <span>{locale === "id" ? "Aset Kelolaan" : "Assets Under Management"}</span>
+              <strong>USD 2.3T</strong>
+            </article>
+            <article className="metric">
+              <span>{locale === "id" ? "Negara Operasional" : "Operational Countries"}</span>
+              <strong>41</strong>
+            </article>
+            <article className="metric">
+              <span>{locale === "id" ? "Kapasitas Energi Terkelola" : "Managed Energy Capacity"}</span>
+              <strong>18.4 GW</strong>
+            </article>
+            <article className="metric">
+              <span>{locale === "id" ? "Keandalan Uptime Kritis" : "Critical Uptime Reliability"}</span>
+              <strong>99.95%</strong>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
           <h2>{locale === "id" ? "Cakupan Industri" : "Industry Coverage"}</h2>
           <div className="card-grid">
             {industries.map((item) => (
-              <article className="card" key={item.id}>
+              <Link
+                className="card card-link"
+                href={`/${locale}/industries/${item.key}`}
+                key={item.id}
+              >
                 <Image
                   alt={item.name}
                   className="card-image"
@@ -80,7 +118,10 @@ export default async function HomePage({ params }: Props) {
                 <p className="chip">{item.key.replace("-", " ")}</p>
                 <h3>{item.name}</h3>
                 <p>{item.summary}</p>
-              </article>
+                <span className="inline-link">
+                  {locale === "id" ? "Buka detail industri ->" : "Open industry brief ->"}
+                </span>
+              </Link>
             ))}
           </div>
         </div>

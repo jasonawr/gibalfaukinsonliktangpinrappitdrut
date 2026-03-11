@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { type ReactNode } from "react";
 
 import { copy, type AppLocale } from "@/lib/i18n";
@@ -27,7 +28,15 @@ export function SiteShell({ locale, children }: Props) {
       <header className="topbar">
         <div className="container topbar-inner">
           <Link className="brand" href={`/${locale}`}>
-            <span className="brand-mark">PT</span>
+            <span className="brand-logo-wrap">
+              <Image
+                alt="PT Gibalfaukinsonliktangpinrappitdrut logo"
+                className="brand-logo"
+                height={56}
+                src="/branding/company-logo.png"
+                width={56}
+              />
+            </span>
             <span className="brand-text">
               PT Gibalfaukinsonliktangpinrappitdrut
               <small>(Persero) Tbk</small>

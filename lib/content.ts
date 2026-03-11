@@ -67,23 +67,15 @@ type TestimonialItem = {
 };
 
 const industryImages: Record<string, string> = {
-  mining:
-    "https://images.unsplash.com/photo-1581091215367-59ab6dcef9a4?auto=format&fit=crop&w=1200&q=80",
-  "oil-gas":
-    "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1200&q=80",
-  healthcare:
-    "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1200&q=80",
-  electrical:
-    "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=1200&q=80",
-  semiconductor:
-    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
-  machinery:
-    "https://images.unsplash.com/photo-1565120130281-53ff18c6b2d2?auto=format&fit=crop&w=1200&q=80",
-  ai: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80",
-  manufacturing:
-    "https://images.unsplash.com/photo-1567789884554-0b844b597180?auto=format&fit=crop&w=1200&q=80",
-  "civil-infrastructure":
-    "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1200&q=80",
+  mining: "https://picsum.photos/seed/mining-enterprise/1200/800",
+  "oil-gas": "https://picsum.photos/seed/oil-gas-enterprise/1200/800",
+  healthcare: "https://picsum.photos/seed/healthcare-enterprise/1200/800",
+  electrical: "https://picsum.photos/seed/electrical-grid-enterprise/1200/800",
+  semiconductor: "https://picsum.photos/seed/semiconductor-enterprise/1200/800",
+  machinery: "https://picsum.photos/seed/machinery-enterprise/1200/800",
+  ai: "https://picsum.photos/seed/ai-enterprise/1200/800",
+  manufacturing: "https://picsum.photos/seed/manufacturing-enterprise/1200/800",
+  "civil-infrastructure": "https://picsum.photos/seed/civil-infrastructure-enterprise/1200/800",
 };
 
 function getIndustryImageByKey(key: string) {
