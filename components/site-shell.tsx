@@ -47,6 +47,7 @@ export function SiteShell({ locale, children }: Props) {
             <Link href={`/${locale}/about`}>{t.nav.about}</Link>
             <Link href={`/${locale}/industries`}>{t.nav.industries}</Link>
             <Link href={`/${locale}/careers`}>{t.nav.careers}</Link>
+            <Link href={`/${locale}/account`}>{t.nav.account}</Link>
             <Link href={`/${locale}/news`}>{t.nav.news}</Link>
             <Link href={`/${locale}/contact`}>{t.nav.contact}</Link>
           </nav>

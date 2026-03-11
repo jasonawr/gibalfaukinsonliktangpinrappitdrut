@@ -67,15 +67,16 @@ type TestimonialItem = {
 };
 
 const industryImages: Record<string, string> = {
-  mining: "https://picsum.photos/seed/mining-enterprise/1200/800",
-  "oil-gas": "https://picsum.photos/seed/oil-gas-enterprise/1200/800",
-  healthcare: "https://picsum.photos/seed/healthcare-enterprise/1200/800",
-  electrical: "https://picsum.photos/seed/electrical-grid-enterprise/1200/800",
-  semiconductor: "https://picsum.photos/seed/semiconductor-enterprise/1200/800",
-  machinery: "https://picsum.photos/seed/machinery-enterprise/1200/800",
-  ai: "https://picsum.photos/seed/ai-enterprise/1200/800",
-  manufacturing: "https://picsum.photos/seed/manufacturing-enterprise/1200/800",
-  "civil-infrastructure": "https://picsum.photos/seed/civil-infrastructure-enterprise/1200/800",
+  mining: "https://source.unsplash.com/1600x900/?mining,excavator,open-pit",
+  "oil-gas": "https://source.unsplash.com/1600x900/?oil,gas,refinery",
+  healthcare: "https://source.unsplash.com/1600x900/?hospital,healthcare,medical",
+  electrical: "https://source.unsplash.com/1600x900/?electrical,power-grid,substation",
+  semiconductor: "https://source.unsplash.com/1600x900/?semiconductor,microchip,circuit-board",
+  machinery: "https://source.unsplash.com/1600x900/?industrial,machinery,factory-equipment",
+  ai: "https://source.unsplash.com/1600x900/?artificial-intelligence,data-center,technology",
+  manufacturing: "https://source.unsplash.com/1600x900/?manufacturing,industrial-robotics,assembly-line",
+  "civil-infrastructure":
+    "https://source.unsplash.com/1600x900/?infrastructure,construction,bridge",
 };
 
 function getIndustryImageByKey(key: string) {
