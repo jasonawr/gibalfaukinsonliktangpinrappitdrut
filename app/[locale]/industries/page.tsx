@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
 
 import { getIndustries, getIndustryUpdates } from "@/lib/content";
@@ -28,7 +29,13 @@ export default async function IndustriesPage({ params }: Props) {
         <div className="card-grid">
           {industries.map((item) => (
             <article className="card" key={item.id}>
-              <img alt={item.name} className="card-image" src={item.imageUrl} />
+              <Image
+                alt={item.name}
+                className="card-image"
+                height={300}
+                src={item.imageUrl}
+                width={600}
+              />
               <p className="chip">{item.key.replace("-", " ")}</p>
               <h3>{item.name}</h3>
               <p>{item.summary}</p>

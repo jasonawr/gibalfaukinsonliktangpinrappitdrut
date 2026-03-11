@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -69,10 +70,12 @@ export default async function HomePage({ params }: Props) {
           <div className="card-grid">
             {industries.map((item) => (
               <article className="card" key={item.id}>
-                <img
+                <Image
                   alt={item.name}
                   className="card-image"
+                  height={300}
                   src={item.imageUrl}
+                  width={600}
                 />
                 <p className="chip">{item.key.replace("-", " ")}</p>
                 <h3>{item.name}</h3>
@@ -119,7 +122,13 @@ export default async function HomePage({ params }: Props) {
           <div className="card-grid">
             {featuredProjects.map((project) => (
               <article className="card" key={project.id}>
-                <img alt={project.title} className="card-image" src={project.imageUrl} />
+                <Image
+                  alt={project.title}
+                  className="card-image"
+                  height={300}
+                  src={project.imageUrl}
+                  width={600}
+                />
                 <p className="chip">{project.sector}</p>
                 <h3>{project.title}</h3>
                 <p>{project.summary}</p>

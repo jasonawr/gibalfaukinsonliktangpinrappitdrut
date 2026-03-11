@@ -44,7 +44,7 @@ export function SiteShell({ locale, children }: Props) {
       <main>{children}</main>
       <footer className="footer">
         <div className="container footer-inner">
-          <div>© 2026 PT Gibalfaukinsonliktangpinrappitdrut (Persero) Tbk</div>
+          <div>(c) 2026 PT Gibalfaukinsonliktangpinrappitdrut (Persero) Tbk</div>
           <div>Indonesia</div>
         </div>
       </footer>
